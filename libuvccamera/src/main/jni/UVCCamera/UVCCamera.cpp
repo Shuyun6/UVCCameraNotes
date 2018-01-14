@@ -55,7 +55,7 @@
  * コンストラクタ
  */
 UVCCamera::UVCCamera()
-:	mFd(0),
+:	mFd(0), //初始化 mFd = 0
 	mUsbFs(NULL),
 	mContext(NULL),
 	mDevice(NULL),

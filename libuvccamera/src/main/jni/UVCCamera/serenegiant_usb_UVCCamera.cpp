@@ -41,6 +41,9 @@
 
 /**
  * set the value into the long field
+ *
+ * 将(field_name)指向的变量引用赋值为val
+ *
  * @param env: this param should not be null
  * @param bullet_obj: this param should not be null
  * @param field_name
@@ -52,8 +55,10 @@ static jlong setField_long(JNIEnv *env, jobject java_obj, const char *field_name
 #endif
     //获取调用该函数的java类
 	jclass clazz = env->GetObjectClass(java_obj);
+	//获取指向"field_name"的引用变量的ID
 	jfieldID field = env->GetFieldID(clazz, field_name, "J");
 	if (LIKELY(field))
+		//设置field指向的值为val
 		env->SetLongField(java_obj, field, val);
 	else {
 		LOGE("__setField_long:field '%s' not found", field_name);
@@ -118,9 +123,10 @@ jint setField_int(JNIEnv *env, jobject java_obj, const char *field_name, jint va
 }
 
 static ID_TYPE nativeCreate(JNIEnv *env, jobject thiz) {
-
+	//打印log
 	ENTER();
 	UVCCamera *camera = new UVCCamera();
+	//将 java调用类中的"mNativePtr" 变量赋值为(Long)camera
 	setField_long(env, thiz, "mNativePtr", reinterpret_cast<ID_TYPE>(camera));
 	RETURN(reinterpret_cast<ID_TYPE>(camera), ID_TYPE);
 }
