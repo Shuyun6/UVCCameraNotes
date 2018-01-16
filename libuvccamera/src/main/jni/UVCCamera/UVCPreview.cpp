@@ -68,17 +68,16 @@ UVCPreview::UVCPreview(uvc_device_handle_t *devh)
 	mFrameCallbackObj(NULL),
 	mFrameCallbackFunc(NULL),
 	callbackPixelBytes(2) {
-
-	ENTER();
-	pthread_cond_init(&preview_sync, NULL);
-	pthread_mutex_init(&preview_mutex, NULL);
-//
-	pthread_cond_init(&capture_sync, NULL);
-	pthread_mutex_init(&capture_mutex, NULL);
-//	
-	pthread_mutex_init(&pool_mutex, NULL);
-	EXIT();
-}
+		ENTER();
+		pthread_cond_init(&preview_sync, NULL);
+		pthread_mutex_init(&preview_mutex, NULL);
+	//
+		pthread_cond_init(&capture_sync, NULL);
+		pthread_mutex_init(&capture_mutex, NULL);
+	//
+		pthread_mutex_init(&pool_mutex, NULL);
+		EXIT();
+	}
 
 UVCPreview::~UVCPreview() {
 

@@ -2019,11 +2019,11 @@ jint registerNativeMethods(JNIEnv* env, const char *class_name, JNINativeMethod 
 }
 
 static JNINativeMethod methods[] = {
-	{ "nativeCreate",					"()J", (void *) nativeCreate },
-	{ "nativeDestroy",					"(J)V", (void *) nativeDestroy },
+	{ "nativeCreate",					"()J", (void *) nativeCreate },// long nativeCreate();
+	{ "nativeDestroy",					"(J)V", (void *) nativeDestroy },//void nativeDestroy(long arg);
 	//
-	{ "nativeConnect",					"(JIIIIILjava/lang/String;)I", (void *) nativeConnect },
-	{ "nativeRelease",					"(J)I", (void *) nativeRelease },
+	{ "nativeConnect",					"(JIIIIILjava/lang/String;)I", (void *) nativeConnect },//int nativeConnect(long arg0, int arg1, int arg2, int arg3, int arg4, int arg5, String arg6);
+	{ "nativeRelease",					"(J)I", (void *) nativeRelease },//int nativeRelese(long arg);
 
 	{ "nativeSetStatusCallback",		"(JLcom/serenegiant/usb/IStatusCallback;)I", (void *) nativeSetStatusCallback },
 	{ "nativeSetButtonCallback",		"(JLcom/serenegiant/usb/IButtonCallback;)I", (void *) nativeSetButtonCallback },
