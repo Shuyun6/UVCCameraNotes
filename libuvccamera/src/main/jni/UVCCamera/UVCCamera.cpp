@@ -1,27 +1,3 @@
-/*
- * UVCCamera
- * library and sample to access to UVC web camera on non-rooted Android device
- *
- * Copyright (c) 2014-2017 saki t_saki@serenegiant.com
- *
- * File name: UVCCamera.cpp
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- *
- * All files in the folder are under this Apache License, Version 2.0.
- * Files in the jni/libjpeg, jni/libusb, jin/libuvc, jni/rapidjson folder may have a different license, see the respective files.
-*/
-
 #define LOG_TAG "UVCCamera"
 #if 1	// デバッグ情報を出さない時1
 	#ifndef LOG_NDEBUG
@@ -65,11 +41,10 @@ UVCCamera::UVCCamera()
 	mPreview(NULL),
 	mCtrlSupports(0),
 	mPUSupports(0) {
-
-	ENTER();
-	clearCameraParams();
-	EXIT();
-}
+		ENTER();
+		clearCameraParams();
+		EXIT();
+	}
 
 /**
  * デストラクタ
@@ -137,10 +112,13 @@ void UVCCamera::clearCameraParams() {
 int UVCCamera::connect(int vid, int pid, int fd, int busnum, int devaddr, const char *usbfs) {
 	ENTER();
 	uvc_error_t result = UVC_ERROR_BUSY;
+	//mDeviceHandle is null here, and fd(file dir) is not null
 	if (!mDeviceHandle && fd) {
 		if (mUsbFs)
 			free(mUsbFs);
+		//赋值,usbfs = /dev/bus/usb
 		mUsbFs = strdup(usbfs);
+		//mContext is null after initializing in constructor
 		if (UNLIKELY(!mContext)) {
 			result = uvc_init2(&mContext, NULL, mUsbFs);
 //			libusb_set_debug(mContext->usb_ctx, LIBUSB_LOG_LEVEL_DEBUG);
@@ -153,6 +131,7 @@ int UVCCamera::connect(int vid, int pid, int fd, int busnum, int devaddr, const 
 		clearCameraParams();
 		fd = dup(fd);
 		// 指定したvid,idを持つデバイスを検索, 見つかれば0を返してmDeviceに見つかったデバイスをセットする(既に1回uvc_ref_deviceを呼んである)
+		//指定的vid id，拥有设备搜索，找到0还mDevice发现设备安装（已经1次uvc _ ref _ device叫）
 //		result = uvc_find_device2(mContext, &mDevice, vid, pid, NULL, fd);
 		result = uvc_get_device_with_fd(mContext, &mDevice, vid, pid, NULL, fd, busnum, devaddr);
 		if (LIKELY(!result)) {

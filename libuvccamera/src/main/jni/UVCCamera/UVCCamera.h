@@ -1,27 +1,3 @@
-/*
- * UVCCamera
- * library and sample to access to UVC web camera on non-rooted Android device
- *
- * Copyright (c) 2014-2017 saki t_saki@serenegiant.com
- *
- * File name: UVCCamera.h
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- *
- * All files in the folder are under this Apache License, Version 2.0.
- * Files in the jni/libjpeg, jni/libusb, jin/libuvc, jni/rapidjson folder may have a different license, see the respective files.
-*/
-
 #pragma interface
 
 #ifndef UVCCAMERA_H_
@@ -34,7 +10,7 @@
 #include "UVCStatusCallback.h"
 #include "UVCButtonCallback.h"
 #include "UVCPreview.h"
-
+//模式定义
 #define	CTRL_SCANNING		0x000001	// D0:  Scanning Mode
 #define	CTRL_AE				0x000002	// D1:  Auto-Exposure Mode
 #define	CTRL_AE_PRIORITY	0x000004	// D2:  Auto-Exposure Priority
@@ -85,6 +61,8 @@ typedef struct control_value {
 	int current;
 } control_value_t;
 
+//uvc_error_t是一个枚举类型
+//uvc_device_handle_t包含设备信息的struct
 typedef uvc_error_t (*paramget_func_i8)(uvc_device_handle_t *devh, int8_t *value, enum uvc_req_code req_code);
 typedef uvc_error_t (*paramget_func_i16)(uvc_device_handle_t *devh, int16_t *value, enum uvc_req_code req_code);
 typedef uvc_error_t (*paramget_func_i32)(uvc_device_handle_t *devh, int32_t *value, enum uvc_req_code req_code);

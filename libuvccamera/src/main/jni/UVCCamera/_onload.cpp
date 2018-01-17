@@ -39,7 +39,7 @@ jint JNI_OnLoad(JavaVM *vm, void *reserved) {
     if (vm->GetEnv(reinterpret_cast<void **>(&env), JNI_VERSION_1_6) != JNI_OK) {
         return JNI_ERR;
     }
-    // register native methods
+    // register native methods in UVCCamera.java
     int result = register_uvccamera(env);
 	setVM(vm);
 #if LOCAL_DEBUG
