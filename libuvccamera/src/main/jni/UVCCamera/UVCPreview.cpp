@@ -192,9 +192,11 @@ int UVCPreview::setPreviewDisplay(ANativeWindow *preview_window) {
 	pthread_mutex_lock(&preview_mutex);
 	{
 		if (mPreviewWindow != preview_window) {
+			//先释放，再重新赋值
 			if (mPreviewWindow)
 				ANativeWindow_release(mPreviewWindow);
 			mPreviewWindow = preview_window;
+			//在哪里进行显示？
 			if (LIKELY(mPreviewWindow)) {
 				ANativeWindow_setBuffersGeometry(mPreviewWindow,
 					frameWidth, frameHeight, previewFormat);
