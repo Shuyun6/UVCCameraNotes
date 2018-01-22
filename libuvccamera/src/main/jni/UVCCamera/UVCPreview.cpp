@@ -46,6 +46,7 @@
 #define PREVIEW_PIXEL_BYTES 4	// RGBA/RGBX
 #define FRAME_POOL_SZ MAX_FRAME + 2
 
+//构造
 UVCPreview::UVCPreview(uvc_device_handle_t *devh)
 :	mPreviewWindow(NULL),
 	mCaptureWindow(NULL),
